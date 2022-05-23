@@ -1,0 +1,87 @@
+﻿<Window x:Class="AerodromDomaci.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AerodromDomaci"
+        xmlns:converters="clr-namespace:AerodromDomaci.Konverteri"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        
+        Title="MainWindow" MinHeight="450" MinWidth="800">
+    <Window.Resources>
+        <converters:RaketeKonverter x:Key="RaketeKonv"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="0">
+            <TextBlock Text="Podaci o avionu" HorizontalAlignment="Center"  FontSize="20"/>
+            <TextBlock Text="Tip: "
+                         />
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="TipCB">
+                <ComboBoxItem Content="Putnicki" IsSelected="True" />
+                <ComboBoxItem Content="Ratni" />
+            </ComboBox>
+            <TextBlock Text="Serijski broj: "
+                         />
+            <TextBox Width="300" Text="{Binding Avion.SerijskiBroj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Registracioni broj: "
+                         />
+            <TextBox Width="300" Text="{Binding Avion.RegistracioniBroj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Ime vlasnika:" />
+                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Margin="20 0 0 0">
+                    <TextBlock Text="Prezime vlasnika:" />
+                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Broj Sedista:" />
+            <TextBox Width="300" Text="{Binding Avion.BrojSedista, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <TextBlock Text="Kapacitet Rezervoata:" />
+            <TextBox Width="300" Text="{Binding Avion.KapacitetRezervoara, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <TextBlock Text="Nosivost:" />
+            <TextBox Width="300" Text="{Binding Avion.Nosivost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <Button Content="Dodaj avion" Click="DodajAvion"></Button>
+
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Margin="0 20 0 0" VerticalScrollBarVisibility="Auto">
+            <DataGrid
+                 ItemsSource="{Binding Avioni}"
+                  AutoGenerateColumns="False"
+                SelectionMode="Single"
+                SelectionChanged="DataGrid_SelectionChanged"
+                IsReadOnly="True"
+                 >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Tip" Binding="{Binding Tip}" />
+                    <DataGridTextColumn Width="*" Header="Serijski Broj" Binding="{Binding SerijskiBroj}" />
+                    <DataGridTextColumn Width="*" Header="Registracioni Broj" Binding="{Binding RegistracioniBroj}" />
+                    <DataGridTextColumn Width="*" Header="Ime Vlasnika" Binding="{Binding Vlasnik.Ime}" />
+                    <DataGridTextColumn Width="*" Header="Prezime Vlasnika" Binding="{Binding Vlasnik.Prezime}" />
+                    <DataGridTextColumn Width="*" Header="Broj Sedista" Binding="{Binding BrojSedista}" />
+                    <DataGridTextColumn Width="*" Header="Kapacitet Rezervoara" Binding="{Binding KapacitetRezervoara}" />
+                    <DataGridTextColumn Width="*" Header="Nosivost" Binding="{Binding Nosivost}" />
+                    <DataGridTextColumn Width="*" Header="Broj Raketa">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding Converter="{StaticResource RaketeKonv}">
+                                <Binding Path="BrojRaketa" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
