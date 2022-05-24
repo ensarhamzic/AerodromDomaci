@@ -18,7 +18,7 @@ namespace AerodromDomaci
         private int brojSedista;
         private int kapacitetRezervoara;
         private int nosivost;
-        private int? brojRaketa;
+        private int? brojRaketa; // putnickim avionima je ovo null
 
         public Avion() {
             this.vlasnik = new Vlasnik();

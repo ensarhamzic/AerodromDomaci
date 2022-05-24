@@ -11,7 +11,7 @@ namespace AerodromDomaci.Konverteri
 {
     internal class RaketeKonverter : IMultiValueConverter
     {
-
+        // Konvertuje broj raketa u tekstualni oblik
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             int? brojRaketa = (int?)values[0];

@@ -18,7 +18,7 @@ namespace AerodromDomaci
 
         public DB()
         {
-            connectionString = @"server=localhost;userid=admin;password=root;database=aerodrom";
+            connectionString = @"server=localhost;userid=admin;password=root;database=aerodrom"; // Promeniti parametre
             con = new MySqlConnection(connectionString);
             cmd = new MySqlCommand();
         }
@@ -32,6 +32,7 @@ namespace AerodromDomaci
                 int tip = 1;
                 con.Open();
                 cmd.Connection = con;
+                // Ako uneti vlasnik postoji, nadjemo njegov id da ne bismo imali 2 ista vlasnika. Ako ne nadjemo unesemo novog
                 cmd.CommandText = $"Select id from vlasnik where ime='{avion.Vlasnik.Ime}' and prezime='{avion.Vlasnik.Prezime}'";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -47,7 +48,7 @@ namespace AerodromDomaci
                 }
                 reader.Close();
 
-                cmd.CommandText = $"Select id from tip where ime_tipa='{avion.Tip}'";
+                cmd.CommandText = $"Select id from tip where ime_tipa='{avion.Tip}'"; // Pronadjemo tip aviona
                 reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
@@ -58,7 +59,7 @@ namespace AerodromDomaci
                 cmd.CommandText = $"INSERT INTO avion (tip, ser_br, reg_br,vlasnik, br_sedista, kapacitet_rez,nosivost) values ({tip}, '{avion.SerijskiBroj}', '{avion.RegistracioniBroj}', {vlasnikId}, {avion.BrojSedista}, {avion.KapacitetRezervoara}, {avion.Nosivost})";
                 cmd.ExecuteNonQuery();
                 avionId = (int)cmd.LastInsertedId;
-                if(tip == 2)
+                if(tip == 2) // ako je ratni, dodamo dodatne informacije u tabelu ratni_info
                 {
                     cmd.CommandText = $"insert into ratni_info values ({avionId}, {avion.BrojRaketa})";
                     cmd.ExecuteNonQuery();
@@ -86,6 +87,7 @@ namespace AerodromDomaci
                 int tip = 1;
                 con.Open();
                 cmd.Connection = con;
+                // Kao i kod Create, nadjemo da li postoji vlasnik, ako ne postoji, dodamo ga
                 cmd.CommandText = $"Select id from vlasnik where ime='{avion.Vlasnik.Ime}' and prezime='{avion.Vlasnik.Prezime}'";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
