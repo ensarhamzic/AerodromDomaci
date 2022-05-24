@@ -22,36 +22,51 @@
             <TextBlock Text="Podaci o avionu" HorizontalAlignment="Center"  FontSize="20"/>
             <TextBlock Text="Tip: "
                          />
-            <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="TipCB">
-                <ComboBoxItem Content="Putnicki" IsSelected="True" />
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="TipCB" >
+                <ComboBoxItem Content="Putnicki" />
                 <ComboBoxItem Content="Ratni" />
             </ComboBox>
             <TextBlock Text="Serijski broj: "
                          />
-            <TextBox Width="300" Text="{Binding Avion.SerijskiBroj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="300" Text="{Binding Avion.SerijskiBroj,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="SerTB" />
             <TextBlock Text="Registracioni broj: "
                          />
-            <TextBox Width="300" Text="{Binding Avion.RegistracioniBroj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="300" Text="{Binding Avion.RegistracioniBroj,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="RegTB" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel>
                     <TextBlock Text="Ime vlasnika:" />
-                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Ime,
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="ImeTB" />
                 </StackPanel>
                 <StackPanel Margin="20 0 0 0">
                     <TextBlock Text="Prezime vlasnika:" />
-                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Width="140" Text="{Binding Avion.Vlasnik.Prezime,
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="PrezimeTB" />
                 </StackPanel>
             </StackPanel>
             <TextBlock Text="Broj Sedista:" />
-            <TextBox Width="300" Text="{Binding Avion.BrojSedista, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            
-            <TextBlock Text="Kapacitet Rezervoata:" />
-            <TextBox Width="300" Text="{Binding Avion.KapacitetRezervoara, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            
+            <TextBox Width="300" Text="{Binding Avion.BrojSedista,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="SedTB" />
+
+            <TextBlock Text="Kapacitet Rezervoara:" />
+            <TextBox Width="300" Text="{Binding Avion.KapacitetRezervoara,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="KapTB" />
+
             <TextBlock Text="Nosivost:" />
-            <TextBox Width="300" Text="{Binding Avion.Nosivost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            
-            <Button Content="Dodaj avion" Click="DodajAvion"></Button>
+            <TextBox Width="300" Text="{Binding Avion.Nosivost,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="NosivostTB" />
+
+            <TextBlock Text="Broj Raketa:" />
+            <TextBox x:Name="RaketeTB" Width="300" Text="{Binding Avion.BrojRaketa,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0" HorizontalAlignment="Center">
+                <Button Content="Dodaj" Click="DodajAvion" Background="LightGreen"></Button>
+                <Button Margin="30 0 0 0" Content="Azuriraj" Click="AzurirajAvion" Background="LightBlue"></Button>
+                <Button Margin="30 0 0 0" Content="Obrisi" Click="ObrisiAvion" Background="Coral"></Button>
+            </StackPanel>
 
         </StackPanel>
         <ScrollViewer Grid.Row="1" Margin="0 20 0 0" VerticalScrollBarVisibility="Auto">

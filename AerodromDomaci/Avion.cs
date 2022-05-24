@@ -12,8 +12,8 @@ namespace AerodromDomaci
     {
         private int id;
         private string tip;
-        private int serijskiBroj;
-        private int registracioniBroj;
+        private string serijskiBroj;
+        private string registracioniBroj;
         private Vlasnik vlasnik;
         private int brojSedista;
         private int kapacitetRezervoara;
@@ -24,7 +24,7 @@ namespace AerodromDomaci
             this.vlasnik = new Vlasnik();
         }
 
-        public Avion(int serijskiBroj, int registracioniBroj, Vlasnik vlasnik,
+        public Avion(string serijskiBroj, string registracioniBroj, Vlasnik vlasnik,
             int brojSedista, int kapacitetRezervoara, int nosivost, int? brojRaketa = null)
         {
             this.SerijskiBroj = serijskiBroj;
@@ -56,7 +56,7 @@ namespace AerodromDomaci
             }
         }
 
-        public int SerijskiBroj
+        public string SerijskiBroj
         {
             get
             {
@@ -69,7 +69,7 @@ namespace AerodromDomaci
             }
         }
 
-        public int RegistracioniBroj
+        public string RegistracioniBroj
         {
             get
             {
