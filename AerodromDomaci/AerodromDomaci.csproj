@@ -78,7 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="INotifyProperyChanged.cs" />
     <Compile Include="Konverteri\RaketeKonverter.cs" />
     <Compile Include="Vlasnik.cs" />
     <Page Include="MainWindow.xaml">
